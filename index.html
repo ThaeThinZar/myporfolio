@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thae ThinZar Zaw | Admission Portfolio</title>
+    
+    <!-- Tailwind CSS (via CDN for immediate usage) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        kmutt: {
+                            orange: '#F05A28', /* Approximate KMUTT Orange */
+                            dark: '#1F1F1F',
+                            light: '#FFF5F0',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+        
+        /* Smooth gradient text */
+        .text-gradient {
+            background: linear-gradient(to right, #F05A28, #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Card Hover Effects */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- LOGO SECTION -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center gap-3">
+                        <!-- 
+                            LOGO LOGIC:
+                            1. This tries to show "logo.png"
+                            2. If "logo.png" is missing, it hides itself and shows the icon below it.
+                        -->
+                        <img src=""img\Thae.jpg" alt="Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+                        
+                        <!-- Fallback Icon (Hidden by default, shows if logo.png fails) -->
+                        <div class="hidden h-10 w-10 bg-orange-50 rounded-lg items-center justify-center text-kmutt-orange border border-orange-100 transition-all">
+                            <i class="fas fa-graduation-cap text-xl"></i>
+                        </div>
+
+                        <span class="font-heading font-bold text-xl tracking-tight text-gray-900">
+                            Thae ThinZar<span class="text-kmutt-orange"> Zaw</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-gray-600 hover:text-kmutt-orange font-medium transition-colors">About</a>
+                    <a href="#education" class="text-gray-600 hover:text-kmutt-orange font-medium transition-colors">Education</a>
+                    <a href="#experience" class="text-gray-600 hover:text-kmutt-orange font-medium transition-colors">Experience</a>
+                    <a href="#projects" class="text-gray-600 hover:text-kmutt-orange font-medium transition-colors">Projects</a>
+                    <a href="#motivation" class="px-5 py-2 rounded-full bg-kmutt-orange text-white font-medium hover:bg-orange-700 transition-colors shadow-md shadow-orange-500/30">Why KMUTT?</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">About</a>
+                <a href="#education" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Education</a>
+                <a href="#experience" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Experience</a>
+                <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-md">Projects</a>
+                <a href="#motivation" class="block px-3 py-2 text-base font-medium text-kmutt-orange font-bold">Motivation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+        <!-- Background Decor -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-50"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-50 rounded-full blur-3xl opacity-50"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-4xl mx-auto fade-in-section">
+                <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-orange-200 bg-orange-50 text-orange-700 text-sm font-semibold tracking-wide mb-6">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                    Aspiring Computer Engineer
+                </div>
+                <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-gray-900 leading-[1.1] mb-8">
+                    From Curiosity to <br>
+                    <span class="text-gradient">Digital Era</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed font-light max-w-2xl mx-auto">
+                    I am <strong class="text-gray-900 font-medium">Thae ThinZar Zaw</strong>, a resilient learner applying for the Bachelor of Computer Engineering at KMUTT to transform potential into technological solutions for our country.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#motivation" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        Read My Motivation
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#projects" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all">
+                        View Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Profile & Interest -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                
+                <!-- Left: Personal Profile -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 fade-in-section relative overflow-hidden">
+                    
+                    <!-- NEW: Profile Photo Section -->
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start mb-6 gap-6">
+                        <!-- Profile Image Container -->
+                        <div class="flex-shrink-0">
+                             <!-- 
+                                PROFILE PHOTO:
+                                Save your photo as "profile.jpg" in the same folder.
+                            -->
+                            <img src="img\Thae.jpg" alt="Thae ThinZar Zaw" class="w-24 h-24 rounded-full object-cover border-4 border-orange-50 shadow-md" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            
+                            <!-- Fallback Icon if no photo found -->
+                            <div class="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center text-kmutt-orange shadow-inner hidden">
+                                <i class="fas fa-user text-3xl"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="text-2xl font-heading font-bold text-gray-900 mb-1">Personal Profile</h2>
+                            <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full font-medium">Admission Applicant</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        I completed my GED after a two‑year break from school and continued learning through migrant learning center, an A+ Computer Hardware & Software course, volunteering, and work experience. Growing up as a Myanmar migrant student with limited resources has been challenging, but it made me more responsible, independent, and determined to use education to change my life.
+                    </p>
+                </div>
+
+                <!-- Right: Engineering Interest -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 fade-in-section" style="transition-delay: 100ms;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 mr-4">
+                            <i class="fas fa-microchip text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-heading font-bold text-gray-900">Why Computer Engineering?</h2>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Most people see only the screen and keyboard, but I always want to know what happens inside. I am curious how metal and silicon can work together and follow logic to make decisions.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        This curiosity led me to a three‑month course in Computer Hardware and Software Basics. I realized I want to go deeper into physics, mathematics, and circuit principles.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Work Experience -->
+    <section id="education" class="py-20 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-section">
+                <span class="text-kmutt-orange font-bold tracking-wider uppercase text-sm">Timeline</span>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mt-2">Education & Experience</h2>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Vertical Line -->
+                <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px bg-gray-200"></div>
+
+                <!-- Item 1: Social Media Manager -->
+                <div class="relative z-10 mb-12 fade-in-section">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="flex-1 w-full md:w-1/2 md:pr-10 md:text-right mb-4 md:mb-0">
+                            <h3 class="text-xl font-bold text-gray-900">Social Media Manager</h3>
+                            <p class="text-kmutt-orange font-medium">Media Organization | 2023–Present</p>
+                            <p class="text-gray-500 mt-2 text-sm">
+                                Managed online content, created graphics, and coordinated with teams. Developed strong time management and problem‑solving skills.
+                            </p>
+                        </div>
+                        <div class="w-10 h-10 bg-white border-4 border-kmutt-orange rounded-full flex-shrink-0 flex items-center justify-center shadow-lg absolute left-0 md:left-1/2 transform -translate-x-1/2 md:translate-x-[-50%] top-0 md:top-2"></div>
+                        <div class="flex-1 w-full md:w-1/2 md:pl-10"></div>
+                    </div>
+                </div>
+
+                <!-- Item 2: GED -->
+                <div class="relative z-10 mb-12 fade-in-section">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="flex-1 w-full md:w-1/2 md:pr-10"></div>
+                        <div class="w-10 h-10 bg-gray-900 border-4 border-white rounded-full flex-shrink-0 flex items-center justify-center shadow-lg absolute left-0 md:left-1/2 transform -translate-x-1/2 md:translate-x-[-50%] top-0 md:top-2 text-white text-xs">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="flex-1 w-full md:w-1/2 md:pl-10 md:text-left mb-4 md:mb-0">
+                            <div class="flex flex-col items-start">
+                                <h3 class="text-xl font-bold text-gray-900">GED Diploma</h3>
+                                <p class="text-gray-500 font-medium">Migrant Learning Center</p>
+                                <p class="text-gray-500 mt-2 text-sm mb-3">
+                                    Achieved strong scores in Mathematics and Science after a two-year gap, demonstrating self-discipline and logical foundations.
+                                </p>
+                                <!-- NEW: Certificate Button -->
+                                <!-- Save file as: GED_Certificate.pdf -->
+                                <a href="img\GED Diploma.pdf" target="_blank" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors border border-gray-200">
+                                    <i class="fas fa-file-pdf mr-2 text-red-500"></i> View Certificate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <div class="relative z-10 mb-12 fade-in-section">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="flex-1 w-full md:w-1/2 md:pr-10"></div>
+                        <div class="w-10 h-10 bg-gray-900 border-4 border-white rounded-full flex-shrink-0 flex items-center justify-center shadow-lg absolute left-0 md:left-1/2 transform -translate-x-1/2 md:translate-x-[-50%] top-0 md:top-2 text-white text-xs">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="flex-1 w-full md:w-1/2 md:pl-10 md:text-left mb-4 md:mb-0">
+                            <div class="flex flex-col items-start">
+                                <h3 class="text-xl font-bold text-gray-900">IELTS Certificate</h3>
+                                <p class="text-gray-500 font-medium">Self Study</p>
+                                <p class="text-gray-500 mt-2 text-sm mb-3">
+                                    British Council / IDP Validated intermediate English proficiency (Band 5.5), demonstrating the capacity for effective communication in practical and vocational environments.
+                                </p>
+                                <!-- NEW: Certificate Button -->
+                                <!-- Save file as: GED_Certificate.pdf -->
+                                <a href="img\IELTS Result Form.pdf" target="_blank" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors border border-gray-200">
+                                    <i class="fas fa-file-pdf mr-2 text-red-500"></i> View Certificate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative z-10 mb-12 fade-in-section">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="flex-1 w-full md:w-1/2 md:pr-10"></div>
+                        <div class="w-10 h-10 bg-gray-900 border-4 border-white rounded-full flex-shrink-0 flex items-center justify-center shadow-lg absolute left-0 md:left-1/2 transform -translate-x-1/2 md:translate-x-[-50%] top-0 md:top-2 text-white text-xs">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="flex-1 w-full md:w-1/2 md:pl-10 md:text-left mb-4 md:mb-0">
+                            <div class="flex flex-col items-start">
+                                <h3 class="text-xl font-bold text-gray-900">A+ Hardware & Software</h3>
+                                <p class="text-gray-500 font-medium">Certificate Course</p>
+                                <p class="text-gray-500 mt-2 text-sm mb-3">
+                                    Learned to assemble PCs, diagnose hardware faults, and troubleshoot operating systems.
+                                </p>
+                                <!-- NEW: Certificate Button -->
+                                <!-- Save file as: GED_Certificate.pdf -->
+                                <a href="img\A+ Certificate.pdf" target="_blank" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors border border-gray-200">
+                                    <i class="fas fa-file-pdf mr-2 text-red-500"></i> View Certificate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects & Technical Experience Gallery -->
+    <section id="projects" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-section">
+                <span class="text-kmutt-orange font-bold tracking-wider uppercase text-sm">Hands-on Work</span>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mt-2">Projects & Volunteering</h2>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Hardware Repair -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover-card border border-gray-100 fade-in-section">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                        <!-- Image: Src points to local file. Onerror points to Unsplash backup -->
+                        <img 
+                            src="Laptop, Desktop & PC Repair Volunteer.png" 
+                            alt="Hardware Repair" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                            onerror="this.src='https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=80';"
+                        >
+                        <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">Volunteer</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Migrant School IT Support</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Repaired laptops and desktops for students and teachers. Cleaned hardware, checked RAM/Storage, and reinstalled software to extend device life.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">Hardware</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">Troubleshooting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: A+ Course -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover-card border border-gray-100 fade-in-section" style="transition-delay: 100ms;">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                        <img 
+                            src="Computer Basic Training.png" 
+                            alt="A+ Training" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                            onerror="this.src='https://images.unsplash.com/photo-1588702547923-7093a6c3f067?auto=format&fit=crop&w=800&q=80';"
+                        >
+                        <div class="absolute top-4 left-4 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">Training</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">A+ Hardware & Software</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Assembled desktop computers from scratch (CPU, RAM, PSU). Diagnosed simple hardware problems and replaced faulty parts.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">Assembly</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">Diagnostics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Web Coding -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover-card border border-gray-100 fade-in-section" style="transition-delay: 200ms;">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                        <img 
+                            src="AI Vide Coding.png" 
+                            alt="Coding Practice" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                            onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80';"
+                        >
+                        <div class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">Self-Study</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Web & Coding Basics</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Practiced variables, conditions, and loops. Created and managed online content about technology and education.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">Programming</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">Digital Literacy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: MIL -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover-card border border-gray-100 fade-in-section" style="transition-delay: 300ms;">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                        <img 
+                            src="MIL.png" 
+                            alt="MIL Training" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                            onerror="this.src='https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?auto=format&fit=crop&w=800&q=80';"
+                        >
+                        <div class="absolute top-4 left-4 bg-yellow-600 text-white text-xs font-bold px-3 py-1 rounded-full">Workshop</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Media & Info Literacy</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Training by OEDC. Learned to use and evaluate information responsibly in the digital age.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 5: Children's Day -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover-card border border-gray-100 fade-in-section" style="transition-delay: 400ms;">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                        <img 
+                            src="international Children Day.png" 
+                            alt="Children Day" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                            onerror="this.src='https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80';"
+                        >
+                        <div class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">Social</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Children's Day Event</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Joined activities focused on children’s rights and education, deepening awareness of social issues.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivation Section (Dark Mode Style) -->
+    <section id="motivation" class="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-kmutt-orange opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10 fade-in-section">
+                <i class="fas fa-quote-left text-4xl text-kmutt-orange opacity-50 mb-4"></i>
+                <h2 class="text-3xl md:text-5xl font-heading font-bold mb-6">Motivation & Purpose</h2>
+            </div>
+            
+            <div class="bg-white/10 backdrop-blur-sm p-8 md:p-10 rounded-3xl border border-white/10 fade-in-section">
+                <p class="text-lg leading-relaxed text-gray-300 mb-6">
+                    The political and economic situation in Myanmar has strongly affected my family, and we cannot afford a four‑year international programme, even though they fully support my dream of studying Computer Engineering. This is why I am applying for the <span class="text-white font-bold">Multi‑Intellectuals Scholarship</span> and the <span class="text-white font-bold">GMS Country Scholarship</span>, which are designed to support students from countries in the Greater Mekong Subregion, including Myanmar, so that financial barriers do not stop us from accessing quality education.
+                </p>
+                <p class="text-lg leading-relaxed text-gray-300 mb-6">
+                    My personal journey—from earning the GED through self‑study after a two‑year education gap to completing an A+ Hardware & Software course and volunteering in digital literacy projects—has shown that I can learn independently, work hard, and use technology to help others, not only myself. In the future, I want to use my skills in computer engineering to improve technology infrastructure and digital access in Myanmar and the wider GMS region, especially for communities facing conflict, migration, or limited resources like mine, so that education and information become more accessible and fair.
+                </p>
+                <div class="mt-8 pt-8 border-t border-white/10 flex items-center justify-between">
+                    <div>
+                        <p class="font-bold text-white text-lg">Thae ThinZar Zaw</p>
+                        <p class="text-gray-400 text-sm">Admission Applicant</p>
+                    </div>
+                    <img src="https://www.kmutt.ac.th/wp-content/uploads/2020/09/KMUTT_CI_Semi_Logo-normal-full-265x300.png" alt="KMUTT" class="h-12 opacity-80 bg-white rounded-full p-1">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-50 border-t border-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Let's Connect</h2>
+            <div class="flex justify-center space-x-6 mb-8">
+                <!-- Replace # with actual links -->
+                <a href="mailto:thaethinzarzaw007@gmail.com" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-kmutt-orange hover:text-white transition-colors">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-colors">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-blue-400 hover:text-white transition-colors">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                &copy; 2026 Thae ThinZar Zaw. Designed for KMUTT Admission Application.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
